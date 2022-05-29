@@ -3,7 +3,7 @@
 #define LED_TO_BIT_OFFSSET  1
 #define BIT_MASK            1
 #define LEDS_ALL_OFF        0x0000
-#define LEDS_ALL_ON        0xFFFF
+#define LEDS_ALL_ON         0xFFFF
 
 static uint16_t * port;
 
@@ -30,4 +30,8 @@ void LedTurnOnAll(void){
 
 void LedTurnOffAll(void){
     *port = LEDS_ALL_OFF;
+}
+
+bool getStateLed(uint8_t led){
+    return *port & LedToMask(led);
 }

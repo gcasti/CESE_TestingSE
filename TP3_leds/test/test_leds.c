@@ -69,3 +69,14 @@ void test_TurnOffAllLed(void){
     LedTurnOffAll();
     TEST_ASSERT_EQUAL_HEX16(0x0000 , virtual_leds);
 }
+
+// 7) Se puede consultar el estado de un LED.
+void test_getStateLed(void){
+    bool state = false ;
+    LedTurnOn(1);
+    state = getStateLed(1);  
+    TEST_ASSERT_TRUE(state);
+    LedTurnOff(15);
+    state = getStateLed(15);
+    TEST_ASSERT_FALSE(state);
+}
