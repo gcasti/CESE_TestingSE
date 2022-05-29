@@ -10,4 +10,8 @@ void LedTurnOn(uint8_t led);
 
 void LedTurnOff(uint8_t led);
 
+void LedTurnOnAll(void);
+
+void LedTurnOffAll(void);
+      
 #endif

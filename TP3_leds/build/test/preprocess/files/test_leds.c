@@ -2,8 +2,6 @@
 #include "/var/lib/gems/3.0.0/gems/ceedling-0.31.1/vendor/unity/src/unity.h"
 
 
-
-
 static uint16_t virtual_leds;
 
 
@@ -95,5 +93,49 @@ void test_TurnOnAndOffManyLeds(void){
    ((void *)0)
 
    ), (UNITY_UINT)(52), UNITY_DISPLAY_STYLE_HEX16);
+
+}
+
+
+
+
+
+void test_TurnOnAllLeds(void){
+
+    int i = 0;
+
+    for(i=0;i < 15;i++)
+
+    {
+
+        LedTurnOff(i);
+
+    }
+
+    LedTurnOnAll();
+
+    UnityAssertEqualNumber((UNITY_INT)(UNITY_INT16)((0xFFFF)), (UNITY_INT)(UNITY_INT16)((virtual_leds)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(63), UNITY_DISPLAY_STYLE_HEX16);
+
+}
+
+
+
+
+
+void test_TurnOffAllLed(void){
+
+    LedTurnOnAll();
+
+    LedTurnOffAll();
+
+    UnityAssertEqualNumber((UNITY_INT)(UNITY_INT16)((0x0000)), (UNITY_INT)(UNITY_INT16)((virtual_leds)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(70), UNITY_DISPLAY_STYLE_HEX16);
 
 }
