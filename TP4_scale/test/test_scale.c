@@ -12,6 +12,8 @@
 */
 
 #include "unity.h"
+#include "stdbool.h"
+#include "scale.h"
 
 void setUp(void)
 {
@@ -21,7 +23,12 @@ void tearDown(void)
 {
 }
 
-// test ceedling
-void test_init_project(void){
-    TEST_FAIL_MESSAGE("Proyecto inicial");
+//1. Al inicializarse la librería se verifica el parámetro m tenga un valor de configuración disponible.
+void test_init_scale(void)
+{
+    bool test_config = false;
+    
+    test_config = scale_init(); 
+    
+    TEST_ASSERT_TRUE(test_config);
 }
