@@ -23,7 +23,7 @@ void tearDown(void)
 {
 }
 
-//1. Al inicializarse la librería se verifica el parámetro m tenga un valor de configuración disponible.
+// 1. Al inicializarse la librería se verifica el parámetro m tenga un valor de configuración disponible.
 void test_init_scale(void)
 {
     bool test_config = false;
@@ -31,4 +31,14 @@ void test_init_scale(void)
     test_config = scale_init(); 
     
     TEST_ASSERT_TRUE(test_config);
+}
+
+// 2. Si no existe un valor de configuración se indica al usuario que realice el procedimiento de calibración.
+void test_config_scale(void)
+{
+    bool test_config = false;
+
+    test_config = scale_getConfigStatus();
+
+    TEST_ASSERT_TRUE_MESSAGE(test_config,"Realice la calibracion");
 }

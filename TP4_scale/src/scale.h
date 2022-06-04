@@ -27,6 +27,7 @@ extern "C" {
 /*=====[Public function-like macros]=========================================*/
 
 bool scale_init(void);
+bool scale_getConfigStatus(void);
 
 /*=====[Definitions of public data types]====================================*/
 

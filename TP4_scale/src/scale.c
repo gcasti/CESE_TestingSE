@@ -11,6 +11,7 @@
 /*=====[Inclusion of own header]=============================================*/
 
 #include "scale.h"
+#include "stdint.h"
 
 /*=====[Inclusions of private function dependencies]=========================*/
 
@@ -20,6 +21,8 @@
 
 /*=====[Definitions of private data types]===================================*/
 
+static bool scale_config = true;
+static int32_t m = 1;
 /*=====[Definitions of external public global variables]=====================*/
 
 /*=====[Definitions of public global variables]==============================*/
@@ -32,11 +35,18 @@
 
 bool scale_init(void)
 {
-    bool scale_config = true;
+    bool retVal = false;
     
-    return scale_config;
+    if(m != 0){
+        retVal = true;
+    }
+    return retVal;
 }
 
+bool scale_getConfigStatus(void)
+{
+    return scale_config;
+}
 /*=====[Implementations of interrupt functions]==============================*/
 
 /*=====[Implementations of private functions]================================*/
