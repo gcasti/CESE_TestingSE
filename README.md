@@ -24,9 +24,9 @@ carrera de especialización / maestría y escribir un test unitario con ceedling
 lo menos 5 test cases. El archivo de test debe tener por lo menos 65 líneas de extensión
 
 ### Propuesta
-Realizar el desarrollo de una librería para cálculo de peso a partir de los datos que adquiridos por un conversor analógico digital(AD) utilizando la técnica TDD y testing unitario.
+Realizar el desarrollo de una librería para cálculo de peso a partir de los datos adquiridos por un conversor analógico digital(AD) utilizando la técnica TDD y testing unitario.
 
-Los datos de entrada son un entero signado de 32 bits. Se emplea una indicación booleana cuando existe un nuevo dato disponible.
+Los datos de entrada son un entero signado de 32 bits. Se empleará una indicación booleana cuando existe un nuevo dato disponible.
 
 ### Requerimientos de la librería:
 
@@ -37,27 +37,28 @@ Los datos de entrada son un entero signado de 32 bits. Se emplea una indicación
     * Weigth: peso calculado
     * m    : pendiente para el cálculo del peso
     * code : código del AD 
-    * Wzero : valor del cero determinado por el usuario
+    * Wzero : valor cero determinado por el usuario
     * Wtare : valor de tara determinado por el usuario 
 
-2. Se debe indicar al usuario que existe un nuevo valor de peso calculado.
+2. Debe indicarse al usuario que existe un nuevo valor de peso calculado.
 
-3. El valor m puede configurarse mediante el siguiente procedimiento
-    * El usuario ingresa el valor del peso de referencia (Wref).
-    * El usuario coloca el peso de referencia sobre la plataforma. 
-    * Se almacena el código del AD correspondiente en Cref
-    * El usuario retira el peso de referencia de la plataforma.
-    * Se almacena el código del AD correspondiente en Czero
+3. El valor **m** puede configurarse mediante el siguiente procedimiento
+    * El usuario debe ingresar el valor del peso de referencia (Wref).
+    * El usuario debe colocar el peso de referencia sobre la plataforma. 
+    * Debe almacenarse el código del AD correspondiente en Cref
+    * El usuario debe retirar el peso de referencia de la plataforma.
+    * Debe almacenarse el código del AD correspondiente en Czero
     * Se calcula la pendiente como: m = Wref/(Cref - Czs)
-	
+    	
 4. El usuario puede configurar el valor del peso cero almacenando en Wzero realizando un promedio configurable de los últimos valores de peso disponibles.
 
-5. El usuario puede configurar el valor de la tara almacenanda en Wtare realizando un promedio de configurable los últimos valores de peso disponible.
+5. El usuario puede configurar el valor de la tara almacenanda en Wtare realizando un promedio configurable de los últimos valores de peso disponible.
 
-6. Los valores del código del AD utilizados deben poder promediarse tomando una cantidad configurable de muestras. 
+6. Los valores del código del AD utilizados durante la calibración deben poder promediarse tomando una cantidad configurable de muestras.
+
 
 ### Test de la librería:
-1. Al inicializarse la librería se verifica el parámetro m tenga un valor de configuración disponible.
+1. Al inicializarse la librería se verifica que el parámetro m tenga un valor de configuración disponible.
 
 2. Si no existe un valor de configuración se indica al usuario que realice el procedimiento de calibración.
 
