@@ -29,6 +29,9 @@ extern "C" {
 bool scale_init(void);
 bool scale_getConfigStatus(void);
 
+float scale_updateWeigth(void);
+bool scale_newWeigth(void);
+
 /*=====[Definitions of public data types]====================================*/
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
