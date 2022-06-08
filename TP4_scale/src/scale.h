@@ -1,11 +1,11 @@
-/*=====[Module Name]===========================================================
- * Copyright YYYY Author Compelte Name <author@mail.com>
+/*=====[Scale]===========================================================
+ * Copyright 2022, Guillermo Luis Castiglioni 
+ * Mail: guillermo.castiglioni@ciop.unlp.edu.ar
+ * Centro de Investigaciones Opticas
  * All rights reserved.
- * License: license text or at least name and link 
-         (example: BSD-3-Clause <https://opensource.org/licenses/BSD-3-Clause>)
- *
- * Version: 0.0.0
- * Creation Date: YYYY/MM/DD
+ * 
+ * Version: 1.0.0
+ * Creation Date: 2022/06/01
  */
 
 /*=====[Avoid multiple inclusion - begin]====================================*/
@@ -16,7 +16,7 @@
 /*=====[Inclusions of public function dependencies]==========================*/
 #include "stdbool.h"
 
-/*=====[C++ - begin]=========================================================*/
+/*=====[C++ - Guard]=========================================================*/
 
 #ifdef __cplusplus
 extern "C" {
