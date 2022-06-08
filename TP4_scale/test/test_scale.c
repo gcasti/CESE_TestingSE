@@ -66,6 +66,19 @@ void test_updateWeigth(void)
     if(ads1232_newValue()){
         weigth = scale_updateWeigth();
     }
-    
+
     TEST_ASSERT_EQUAL_FLOAT (8542, weigth);
+}
+
+// 4. Se indica al usuario que existe un nuevo valor de peso disponible.
+void test_newValue(void)
+{
+    // No existe un valor de peso calculado
+    TEST_ASSERT_FALSE(scale_newWeigth());
+
+    // Se simula la presencia de un valor del AD
+    if(ads1232_newValue){
+        float weigth = scale_updateWeigth();
+    }
+    TEST_ASSERT_TRUE(scale_newWeigth());
 }
