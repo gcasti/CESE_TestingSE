@@ -58,19 +58,14 @@ int32_t aux_ads1232_readCode(void)
 void test_updateWeigth(void)
 {
     float weigth = 0;
-    bool new_value = false;
+ 
     ads1232_newValue_fake.custom_fake = aux_ads1232_newValue;
     ads1232_readCode_fake.custom_fake = aux_ads1232_readCode;
- 
-    new_value = scale_newWeigth();
-    TEST_ASSERT_FALSE(new_value);
 
     // Se simula la presencia de un valor del AD
-    bool ads1232_newValue = true;       
-    if(ads1232_newValue){
+    if(ads1232_newValue()){
         weigth = scale_updateWeigth();
     }
-    TEST_ASSERT_TRUE(scale_newWeigth);
-    TEST_ASSERT_FLOAT_WITHIN (0.01f, 8542, weigth);
-
+    
+    TEST_ASSERT_EQUAL_FLOAT (8542, weigth);
 }
