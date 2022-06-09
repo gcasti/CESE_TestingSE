@@ -7,3 +7,5 @@ void ads1232_init(void);
 bool ads1232_newValue(void);
 
 int32_t ads1232_readCode(void);
+
+bool ads1232_getValues(int32_t data[3]);

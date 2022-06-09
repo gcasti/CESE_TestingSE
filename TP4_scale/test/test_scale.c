@@ -4,7 +4,7 @@
 3. Se actualiza el cálculo del peso(Weigth) siempre que exista un valor del AD disponible.
 4. Se indica al usuario que existe un nuevo valor de peso disponible.
 5. Se puede leer el último valor de peso disponible.
-6. Se puede calcular el peso promediando una cantidad configurable de valores del código del AD.
+6. Se puede calcular el peso promediando valores del código del AD.
 7. Se puede configurar la cantidad de muestras que se promedian.
 8. Se puede almacenar el valor del peso cero(Wzero) cuando el usuario lo solicite. 
 9. Se puede almacenar el valor de la tara(Wtare) cuando el usuario lo solicite.
@@ -55,6 +55,7 @@ int32_t aux_ads1232_readCode(void)
 }
 
 // 3. Se actualiza el cálculo del peso(Weigth) siempre que exista un valor del AD disponible.
+// 5. Se puede leer el último valor de peso disponible.
 void test_updateWeigth(void)
 {
     float weigth = 0;
@@ -81,4 +82,25 @@ void test_newValue(void)
         float weigth = scale_updateWeigth();
     }
     TEST_ASSERT_TRUE(scale_newWeigth());
+}
+
+bool aux_ads1232_getValues(int32_t data[3] )
+{
+    data[0] = 782;
+    data[1] = 768;
+    data[2] = 786;
+    return true;
+}
+
+// 6. Se puede calcular el peso promediando una cantidad configurable de valores del código del AD.
+void test_avg_weigth(void){
+    
+    ads1232_getValues_fake.custom_fake = aux_ads1232_getValues;
+    
+    scale_setAvg(true);
+    
+    float weigth = scale_updateWeigth(); 
+
+    TEST_ASSERT_TRUE(scale_newWeigth());
+    TEST_ASSERT_FLOAT_WITHIN (0.001, 778.667, weigth);
 }

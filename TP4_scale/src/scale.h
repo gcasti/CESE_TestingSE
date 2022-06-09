@@ -27,11 +27,14 @@ extern "C" {
 /*=====[Public function-like macros]=========================================*/
 
 bool scale_init(void);
+
 bool scale_getConfigStatus(void);
 
 float scale_updateWeigth(void);
+
 bool scale_newWeigth(void);
 
+void scale_setAvg( bool enable_avg);
 /*=====[Definitions of public data types]====================================*/
 
 /*=====[Prototypes (declarations) of public functions]=======================*/

@@ -14,6 +14,7 @@
 #include "scale.h"
 #include "stdint.h"
 #include "ads1232.h"
+#include "stdio.h"
 
 /*=====[Inclusions of private function dependencies]=========================*/
 
@@ -32,6 +33,7 @@ typedef struct{
 typedef struct{
     bool new_value;
     float weigth;
+    bool avg_flag;   
 }state_t;   
 /*=====[Definitions of external public global variables]=====================*/
 
@@ -40,7 +42,7 @@ typedef struct{
 /*=====[Definitions of private global variables]=============================*/
 
 static scale_t sparms = {false,1,0,0};
-static state_t scale_state = {false, 0};
+static state_t scale_state = {false, 0, false};
 
 /*=====[Prototypes (declarations) of private functions]======================*/
 
@@ -72,10 +74,23 @@ bool scale_newWeigth(void)
 
 float scale_updateWeigth(void)
 {
-    int32_t code = 0;
+    float code = 0;
+    int32_t codes[3];
+    float acc = 0;
+    int index;
     
     if(ads1232_newValue){
         code = ads1232_readCode();
+    }
+    if(scale_state.avg_flag)
+    {
+        ads1232_getValues(codes);
+           
+        for(index=0 ; index < 3 ; index++)
+        {
+            acc += codes[index];
+        }
+        code = acc/3;
     }
 
     scale_state.weigth = sparms.m * code + sparms.Wzero - sparms.Wtare;
@@ -84,6 +99,10 @@ float scale_updateWeigth(void)
     return scale_state.weigth;
 }
 
+void scale_setAvg(bool enable_avg)
+{
+    scale_state.avg_flag = enable_avg;
+}
 /*=====[Implementations of interrupt functions]==============================*/
 
 /*=====[Implementations of private functions]================================*/

@@ -68,7 +68,7 @@ Los datos de entrada son un entero signado de 32 bits. Se empleará una indicaci
 
 5. Se puede leer el último valor de peso disponible.
 
-6. Se puede calcular el peso promediando una cantidad configurable de valores del código del AD.
+6. Se puede calcular el peso promediando valores del código del AD.
 
 7. Se puede configurar la cantidad de muestras que se promedian.
 
