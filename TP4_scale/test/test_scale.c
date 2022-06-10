@@ -13,6 +13,7 @@
 
 #include "unity.h"
 #include "mock_ads1232.h"
+#include "mock_utils.h"
 #include "stdbool.h"
 #include "scale.h"
 
@@ -25,11 +26,12 @@ void tearDown(void)
 {
 }
 
+void aux_ads1232_InitDriver(void){}
 // 1. Al inicializarse la librería se verifica el parámetro m tenga un valor de configuración disponible.
 void test_init_scale(void)
 {
     bool test_config = false;
-    
+    ads1232_InitDriver_fake.custom_fake = aux_ads1232_InitDriver;
     test_config = scale_init(); 
     
     TEST_ASSERT_TRUE(test_config);
@@ -45,7 +47,7 @@ void test_config_scale(void)
     TEST_ASSERT_TRUE_MESSAGE(test_config,"Realice la calibracion");
 }
 
-bool aux_ads1232_newValue(void)
+bool aux_ads1232_newData(void)
 {
     return true;
 }
@@ -60,11 +62,11 @@ void test_updateWeigth(void)
 {
     float weigth = 0;
  
-    ads1232_newValue_fake.custom_fake = aux_ads1232_newValue;
+    ads1232_newData_fake.custom_fake = aux_ads1232_newData;
     ads1232_readCode_fake.custom_fake = aux_ads1232_readCode;
 
     // Se simula la presencia de un valor del AD
-    if(ads1232_newValue()){
+    if(ads1232_newData()){
         weigth = scale_updateWeigth();
     }
 
@@ -74,17 +76,19 @@ void test_updateWeigth(void)
 // 4. Se indica al usuario que existe un nuevo valor de peso disponible.
 void test_newValue(void)
 {
+    ads1232_newData_fake.custom_fake = aux_ads1232_newData;
+    
     // No existe un valor de peso calculado
     TEST_ASSERT_FALSE(scale_newWeigth());
 
     // Se simula la presencia de un valor del AD
-    if(ads1232_newValue){
+    if(ads1232_newData()){
         float weigth = scale_updateWeigth();
     }
     TEST_ASSERT_TRUE(scale_newWeigth());
 }
 
-bool aux_ads1232_getValues(int32_t data[3] )
+bool aux_utils_getValues(int32_t data[3] )
 {
     data[0] = 782;
     data[1] = 768;
@@ -95,7 +99,7 @@ bool aux_ads1232_getValues(int32_t data[3] )
 // 6. Se puede calcular el peso promediando una cantidad configurable de valores del código del AD.
 void test_avg_weigth(void){
     
-    ads1232_getValues_fake.custom_fake = aux_ads1232_getValues;
+    utils_getValues_fake.custom_fake = aux_utils_getValues;
     
     scale_setAvg(true);
     
@@ -104,3 +108,5 @@ void test_avg_weigth(void){
     TEST_ASSERT_TRUE(scale_newWeigth());
     TEST_ASSERT_FLOAT_WITHIN (0.001, 778.667, weigth);
 }
+
+// 7. Se puede configurar la cantidad de muestras que se promedian.

@@ -13,8 +13,9 @@
 
 #include "scale.h"
 #include "stdint.h"
-#include "ads1232.h"
 #include "stdio.h"
+#include "ads1232.h"
+#include "utils.h"
 
 /*=====[Inclusions of private function dependencies]=========================*/
 
@@ -52,7 +53,7 @@ bool scale_init(void)
 {
     bool retVal = false;
     
-    ads1232_init();
+    ads1232_InitDriver();
     if( sparms.m != 0)
     {
         sparms.config_status = true;
@@ -77,14 +78,14 @@ float scale_updateWeigth(void)
     float code = 0;
     int32_t codes[3];
     float acc = 0;
-    int index;
+    int index = 0;
     
-    if(ads1232_newValue){
+    if(ads1232_newData()){
         code = ads1232_readCode();
     }
     if(scale_state.avg_flag)
     {
-        ads1232_getValues(codes);
+        utils_getValues(codes);
            
         for(index=0 ; index < 3 ; index++)
         {
