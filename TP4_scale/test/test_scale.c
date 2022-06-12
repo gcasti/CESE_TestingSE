@@ -110,3 +110,13 @@ void test_avg_weigth(void){
 }
 
 // 7. Se puede configurar la cantidad de muestras que se promedian.
+void test_configAVG(void){
+
+   uint8_t num = 3; 
+
+   scale_setAvgNum(num);
+   scale_setAvg(true);
+    
+   test_avg_weigth(); 
+
+}

@@ -14,6 +14,7 @@
 #define _SCALE_H_
 
 /*=====[Inclusions of public function dependencies]==========================*/
+#include "stdint.h"
 #include "stdbool.h"
 
 /*=====[C++ - Guard]=========================================================*/
@@ -34,7 +35,9 @@ float scale_updateWeigth(void);
 
 bool scale_newWeigth(void);
 
-void scale_setAvg( bool enable_avg);
+void scale_setAvg(bool enable_avg);
+
+void scale_setAvgNum(uint8_t num);
 /*=====[Definitions of public data types]====================================*/
 
 /*=====[Prototypes (declarations) of public functions]=======================*/

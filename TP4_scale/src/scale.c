@@ -29,6 +29,7 @@ typedef struct{
     float m;        // [UnitWeigth/code]
     float Wzero;    // [UnitWeigth]
     float Wtare;    // [UnitWeigth]
+    uint8_t avg_num;
 }scale_t;
 
 typedef struct{
@@ -42,7 +43,7 @@ typedef struct{
 
 /*=====[Definitions of private global variables]=============================*/
 
-static scale_t sparms = {false,1,0,0};
+static scale_t sparms = {false,1,0,0,0};
 static state_t scale_state = {false, 0, false};
 
 /*=====[Prototypes (declarations) of private functions]======================*/
@@ -103,6 +104,11 @@ float scale_updateWeigth(void)
 void scale_setAvg(bool enable_avg)
 {
     scale_state.avg_flag = enable_avg;
+}
+
+void scale_setAvgNum(uint8_t num)
+{
+    sparms.avg_num = num;
 }
 /*=====[Implementations of interrupt functions]==============================*/
 
